@@ -767,13 +767,15 @@ body {
       <div class="proj-body">
         <div class="proj-name">智能养老护理机器人</div>
         <div class="proj-from">全国大学生信息安全与对抗技术竞赛 · 智能安全赛 · 全国总决赛 · 2025</div>
-        <div class="proj-desc">全国总决赛一等奖作品。独立负责系统架构设计与 STM32 固件开发，集成激光 SLAM 导航、视觉抓取、语音交互、物联网传感等 8+ 模块，在模拟居家环境中实现全自主运行。</div>
+        <div class="proj-desc">全国总决赛一等奖作品。面向智慧养老场景，设计能在模拟家居环境中全自主运行的护理机器人。全权负责系统架构、STM32 底层固件与多模块协同，将激光 SLAM 导航、视觉抓取、语音交互、物联网传感等 8+ 异构模块集成于单一嵌入式平台。</div>
         <ul class="proj-details">
-          <li>主控 STM32C8T6 系统架构与固件全权开发，自定串口协议处理多传感器数据融合与帧同步</li>
-          <li>机械臂步进电机闭环控制 + MAXCAM 视觉识别，实现目标精准定位与自主抓取</li>
-          <li>融合激光雷达 SLAM 建图导航、Zigbee 物联网组网、语音交互、人脸识别与跌倒检测</li>
+          <li>选用 STM32C8T6 作为主控芯片，独立完成从引脚规划、外设驱动到底层固件的全链路开发，设计自定义串口通信协议处理多传感器数据帧同步与粘包</li>
+          <li>驱动步进电机实现四自由度机械臂闭环控制，集成 MAXCAM 视觉模块完成目标检测、定位与自主抓取</li>
+          <li>融合激光雷达 SLAM 建图与自主导航，实现机器人对居家环境的实时感知与路径规划</li>
+          <li>集成 Zigbee 物联网组网（DHT22 温湿度 + CO₂ 传感器）、科大讯飞语音交互、人脸识别与跌倒检测，构建完整的智能看护闭环</li>
+          <li>基于 MD5 加密保障老人隐私数据传输安全，体现信息安全竞赛核心要求</li>
         </ul>
-        <div class="proj-result">◇ 项目成果：全国一等奖（全国总决赛）</div>
+        <div class="proj-result">◇ 项目成果：全国总决赛一等奖 · 智能安全赛</div>
       </div>
       <div class="proj-tags">
         <span class="proj-tag key">ROS</span><span class="proj-tag key">激光SLAM</span><span class="proj-tag">Zigbee</span><span class="proj-tag">MD5加密</span><span class="proj-tag key">科大讯飞语音</span><span class="proj-tag">人脸识别</span><span class="proj-tag">跌倒检测</span><span class="proj-tag key">STM32C8T6</span><span class="proj-tag">步进电机</span><span class="proj-tag">MAXCAM</span><span class="proj-tag">DHT22</span><span class="proj-tag">CO₂传感器</span>
@@ -790,12 +792,14 @@ body {
       <div class="proj-body">
         <div class="proj-name">智慧药房机器人</div>
         <div class="proj-from">全国大学生机器人及人工智能大赛 · 智慧药房赛道 · 2025</div>
-        <div class="proj-desc">全国一等奖作品。基于 ROS1 搭建智慧药房全自动配送系统，打通"取药→导航→配送"完整链路。</div>
+        <div class="proj-desc">全国一等奖作品。基于 ROS1 搭建智慧药房全自动配送系统，从零设计"取药→分拣→导航→精准配送"全流程，打通药房自动化完整链路。全权参与系统设计与核心模块开发。</div>
         <ul class="proj-details">
-          <li>负责激光 SLAM 建图、move_base 全局规划 + TEB 局部规划，自主完成避障参数调优</li>
-          <li>开发语音交互与业务逻辑模块，集成视觉识别实现药品/货架自动识别与精准配送</li>
+          <li>部署激光雷达完成药房环境 SLAM 建图，基于 move_base 框架实现全局路径规划，配置 TEB 局部规划器并针对药房窄通道场景反复调优避障参数</li>
+          <li>开发语音交互模块实现人机自然语言指令下达，编写业务逻辑代码串联取药、分拣、配送各环节状态机</li>
+          <li>集成视觉识别模块完成药品类别与货架位置识别，配合导航系统实现精准定位与自动配送</li>
+          <li>针对 ROS 节点间通信延迟与多任务并发问题，优化 topic 发布频率与节点调度策略，保障系统实时性与稳定性</li>
         </ul>
-        <div class="proj-result">◇ 项目成果：全国一等奖</div>
+        <div class="proj-result">◇ 项目成果：全国一等奖 · 智慧药房赛道</div>
       </div>
       <div class="proj-tags">
         <span class="proj-tag key">ROS1</span><span class="proj-tag key">SLAM</span><span class="proj-tag key">move_base</span><span class="proj-tag key">TEB</span><span class="proj-tag">激光雷达</span><span class="proj-tag">语音交互</span><span class="proj-tag">视觉识别</span><span class="proj-tag">避障调参</span>
@@ -812,13 +816,15 @@ body {
       <div class="proj-body">
         <div class="proj-name">智能循迹打靶小车</div>
         <div class="proj-from">全国大学生电子设计大赛（控制赛道）· 队长 · 2025</div>
-        <div class="proj-desc">队长带队完成。基于 STM32 + MPSM0 双主控，YOLO 视觉识别结合串行 PID 控制，实现高速循迹、目标跟踪与激光精准打靶。</div>
+        <div class="proj-desc">担任队长，带领团队在限时四天三夜内完成从方案设计到整车联调。采用 STM32C8T6 + MPSM0G3507 双主控架构——底盘 STM32 负责红外循迹与运动控制，视觉 MPSM0 专攻 YOLO 识别与云台打靶，双芯通过 UART 协同。YOLO 视觉识别结合串行 PID 闭环控制，实现高速运动中 2 秒锁定目标并精准命中靶心。</div>
         <ul class="proj-details">
-          <li>YOLO 视觉模块 2 秒内锁定目标，配合云台 PID 闭环控制实现激光精准命中靶心</li>
-          <li>双模式运行：基础版黑线循迹打靶 + 进阶版椭圆轨道边行驶边持续锁定打靶</li>
-          <li>独立完成传感器选型、电机闭环驱动、滤波算法及整车系统联调</li>
+          <li>STM32C8T6 主控底盘：红外传感器阵列检测黑线，串行 PID 控制直流电机实现稳定循迹与速度闭环</li>
+          <li>MPSM0G3507 主控视觉与云台：部署轻量 YOLO 模型，2 秒内完成目标识别与锁定，PID 控制二维云台实时跟踪并激光打靶</li>
+          <li>双主控间 UART 通信协同，自定状态同步协议确保底盘运动与云台瞄准的时序配合</li>
+          <li>基础模式完成指定黑线圈数后静止打靶；进阶模式沿椭圆轨道持续行驶、边运动边锁定目标连续打靶或画圆</li>
+          <li>独立负责整车传感器选型（红外、激光、视觉模块）、电机驱动电路设计、数字滤波算法编写与限时内系统联调</li>
         </ul>
-        <div class="proj-result">◇ 项目成果：省级二等奖（队长）</div>
+        <div class="proj-result">◇ 项目成果：省级二等奖 · 队长带队 · 四天三夜限时完赛</div>
       </div>
       <div class="proj-tags">
         <span class="proj-tag key">YOLO视觉</span><span class="proj-tag key">串行PID</span><span class="proj-tag">云台控制</span><span class="proj-tag">电机闭环</span><span class="proj-tag">滤波算法</span><span class="proj-tag">红外检测</span><span class="proj-tag key">STM32C8T6</span><span class="proj-tag">MPSM0G3507</span>
