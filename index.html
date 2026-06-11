@@ -195,7 +195,14 @@ body {
 }
 .hero .subtitle {
   font-size:0.88rem; color:var(--text-secondary); font-weight:300;
-  letter-spacing:2px; margin-bottom:16px;
+  letter-spacing:2px; margin-bottom:6px;
+}
+.job-target {
+  font-family:var(--font-mono); font-size:0.72rem;
+  color:var(--blue); margin-bottom:16px;
+  padding:5px 12px; display:inline-block;
+  background:var(--blue-faint); border-radius:var(--radius);
+  letter-spacing:0.5px;
 }
 .hero-stats { display:flex; gap:22px; flex-wrap:wrap; }
 .hero-stat { font-family:var(--font-mono); }
@@ -538,6 +545,7 @@ body {
   .hero .subtitle { font-size:9px; color:#555; }
   .hero-stats { display:none; }
   .hero-badge { display:none; }
+  .job-target { font-size:8px; background:none; padding:2px 0; color:#333; }
   .hero-photo-wrap::before { border-color:#999; }
   .hero-photo-wrap::after { display:none; }
   .hero-photo-inner { width:60px; height:60px; border-color:#333; }
@@ -630,6 +638,7 @@ body {
       <div class="hero-badge"><span class="dot"></span> 嵌入式 · 机器人 · ROS · STM32</div>
       <h1>曹 刚</h1>
       <div class="subtitle">嵌入式软件工程师 / 机器人工程师</div>
+      <div class="job-target">求职意向：嵌入式软件工程师（实习 / 应届）</div>
       <div class="hero-stats">
         <div class="hero-stat">
           <div class="hero-stat-val">7<sup style="font-size:0.5em">+</sup></div>
