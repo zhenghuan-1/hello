@@ -435,24 +435,18 @@ body {
 .award-result.b { color:var(--text-muted); }
 
 /* ── Self Evaluation ── */
-.eval-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; }
-@media(max-width:720px) { .eval-grid { grid-template-columns:1fr; } }
-.eval-card {
+.eval-single {
   background:var(--white); border:1px solid var(--blue-line);
-  border-radius:var(--radius-lg); padding:20px;
+  border-radius:var(--radius-lg); padding:22px 24px;
   position:relative; transition:all 0.3s var(--ease);
+  border-left:3px solid var(--blue);
 }
-.eval-card:hover {
+.eval-single:hover {
   border-color:var(--blue-light);
-  transform:translateY(-2px);
   box-shadow:0 4px 20px rgba(37,99,235,0.06);
 }
-.eval-card .ev-icon {
-  font-size:2.4rem; color:var(--blue-light); line-height:0.8;
-  margin-bottom:10px; opacity:0.5;
-}
-.eval-card p {
-  font-size:0.79rem; color:var(--text-secondary); line-height:1.75;
+.eval-single p {
+  font-size:0.82rem; color:var(--text-secondary); line-height:1.9;
 }
 
 /* ── Footer ── */
@@ -528,7 +522,6 @@ body {
   .edu-card { grid-template-columns:1fr; }
   .award-row { grid-template-columns:1fr auto; padding:9px 14px; font-size:0.72rem; }
   .award-rank { display:none; }
-  .eval-grid { grid-template-columns:1fr; }
   .back-top { bottom:18px; right:18px; width:32px; height:32px; }
 }
 @media(max-width:480px) {
@@ -592,11 +585,9 @@ body {
   .award-row.head { background:#333; color:#fff; }
   .award-rank { display:none; }
 
-  .eval-grid { grid-template-columns:1fr; gap:4px; }
-  .eval-card { border:none; border-left:3px solid #333; border-radius:0; padding:6px 10px; background:#fff; }
-  .eval-card:hover { transform:none; box-shadow:none; }
-  .eval-card .ev-icon { display:none; }
-  .eval-card p { font-size:8px; color:#555; }
+  .eval-single { border:none; border-left:3px solid #333; border-radius:0; padding:8px 12px; background:#fff; }
+  .eval-single:hover { box-shadow:none; }
+  .eval-single p { font-size:8px; color:#555; }
 
   .footer { border-color:#ccc; margin-top:16px; padding-top:10px; }
   .footer-main { font-size:10px; }
@@ -657,6 +648,10 @@ body {
         <div class="hero-stat">
           <div class="hero-stat-val">2×</div>
           <div class="hero-stat-label">全国一等奖</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">1×</div>
+          <div class="hero-stat-label">全国二等奖</div>
         </div>
         <div class="hero-stat">
           <div class="hero-stat-val">ROS</div>
@@ -878,19 +873,8 @@ body {
       <h2>自我评价</h2>
       <span class="section-line"></span>
     </div>
-    <div class="eval-grid">
-      <div class="eval-card">
-        <div class="ev-icon">竞</div>
-        <p>两年内累计参加 7 项学科竞赛，获 2 项全国一等奖、1 项省级一等奖，竞赛经历丰富且持续。</p>
-      </div>
-      <div class="eval-card">
-        <div class="ev-icon">全</div>
-        <p>具备从硬件选型到固件开发再到系统集成的完整项目经验，能独立完成嵌入式系统全链路开发。</p>
-      </div>
-      <div class="eval-card">
-        <div class="ev-icon">解</div>
-        <p>动手能力强，善于在实际工程中定位并解决问题；多次作为核心成员参与国家级竞赛项目。</p>
-      </div>
+    <div class="eval-single">
+      <p>两年内累计参加 7 项学科竞赛，获 2 项全国一等奖、1 项省级一等奖；具备从硬件选型到固件开发再到系统集成的完整项目经验，能独立完成嵌入式系统全链路开发；动手能力强，善于在实际工程中定位并解决问题，多次作为核心成员参与国家级竞赛项目。</p>
     </div>
   </section>
 
