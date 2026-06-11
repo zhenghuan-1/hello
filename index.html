@@ -630,7 +630,7 @@ body {
       <div class="job-target">求职意向：嵌入式软件工程师 / 机器人软件工程师（实习 / 应届）</div>
       <div class="hero-stats">
         <div class="hero-stat">
-          <div class="hero-stat-val">5<sup style="font-size:0.5em">+</sup></div>
+          <div class="hero-stat-val">5项</div>
           <div class="hero-stat-label">学科竞赛</div>
         </div>
         <div class="hero-stat">
@@ -659,8 +659,7 @@ body {
     <span class="contact-item"><span class="ci-icon">✎</span> 1471919223@qq.com</span>
     <span class="contact-item"><span class="ci-icon">⌂</span> 甘肃定西</span>
     <span class="contact-item"><span class="ci-icon">◷</span> 2004.11</span>
-    <span class="contact-item"><span class="ci-icon">⚑</span> 共青团员</span>
-  </div>
+      </div>
 
   <!-- ═══ EDUCATION ═══ -->
   <section class="section reveal">
@@ -694,7 +693,7 @@ body {
       <div class="skill-cell">
         <div class="sk-label">// 芯片开发</div>
         <div class="sk-content">STM32（标准库/HAL/LL）、GD32、ESP32</div>
-        <div class="sk-bars"><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span></div>
+        <div class="sk-bars"><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar"></span></div>
       </div>
       <div class="skill-cell">
         <div class="sk-label">// 通信接口</div>
@@ -709,7 +708,7 @@ body {
       <div class="skill-cell">
         <div class="sk-label">// 开发工具</div>
         <div class="sk-content">Keil、VSCode、ESP-ADF、CCS、Git、Linux (Ubuntu)</div>
-        <div class="sk-bars"><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar"></span></div>
+        <div class="sk-bars"><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar"></span><span class="sk-bar"></span></div>
       </div>
       <div class="skill-cell">
         <div class="sk-label">// 传感器</div>
@@ -747,9 +746,9 @@ body {
       <div class="proj-body">
         <div class="proj-name">智能养老护理机器人</div>
         <div class="proj-from">全国大学生信息安全与对抗技术竞赛 · 智能安全赛 · 全国总决赛 · 2025</div>
-        <div class="proj-desc">全国总决赛一等奖作品。面向智慧养老场景，设计能在模拟家居环境中全自主运行的护理机器人。全权负责系统架构、STM32 底层固件与多模块协同，将激光 SLAM 导航、视觉抓取、语音交互、物联网传感等 8+ 异构模块集成于单一嵌入式平台。</div>
+        <div class="proj-desc">全国总决赛一等奖作品。面向智慧养老场景，设计能在模拟家居环境中全自主运行的护理机器人。采用 STM32F103C8T6 + ROS 上位机的分布式架构：STM32 作为底层主控负责传感器采集、电机驱动与多模块通信调度，激光 SLAM 建图导航与视觉识别运行于上位机，两者通过串口协议协同。</div>
         <ul class="proj-details">
-          <li>选用 STM32F103C8T6 作为主控芯片，独立完成从引脚规划、外设驱动到底层固件的全链路开发，设计自定义串口通信协议处理多传感器数据帧同步与粘包</li>
+          <li>STM32F103C8T6 底层主控：独立完成引脚规划、外设驱动与固件开发，设计自定义串口通信协议（含帧同步与粘包处理），统一调度激光雷达、电机驱动、传感器阵列与上位机的数据交互</li>
           <li>驱动步进电机实现四自由度机械臂闭环控制，集成 MAXCAM 视觉模块完成目标检测、定位与自主抓取</li>
           <li>融合激光雷达 SLAM 建图与自主导航，实现机器人对居家环境的实时感知与路径规划</li>
           <li>集成 Zigbee 物联网组网（DHT22 温湿度 + CO₂ 传感器）、科大讯飞语音交互、人脸识别与跌倒检测，构建完整的智能看护闭环</li>
@@ -824,34 +823,7 @@ body {
         <span>#</span><span>比赛名称</span><span>奖项</span>
       </div>
       <div class="award-row award-major">
-        <span class="award-rank g1">01</span>
-        <span>
-          <span class="award-year">2025</span>
-          <span class="award-name">全国大学生信息安全与对抗技术竞赛（智能安全赛 · 全国总决赛）</span>
-          <span class="award-desc">▸ 设计智能养老护理机器人，负责 STM32F103C8T6 系统架构与固件全权开发，自定串口协议处理多传感器数据融合与帧同步，集成激光 SLAM 导航、MAXCAM 视觉抓取、科大讯飞语音交互、Zigbee 物联网、人脸识别与跌倒检测等 8+ 模块，在模拟居家环境中全自主运行</span>
-        </span>
-        <span class="award-result g">全国一等奖</span>
-      </div>
-      <div class="award-row award-major">
-        <span class="award-rank g1">02</span>
-        <span>
-          <span class="award-year">2025</span>
-          <span class="award-name">全国大学生机器人及人工智能大赛（智慧药房赛道）</span>
-          <span class="award-desc">▸ 基于 ROS1 搭建智慧药房全自动配送系统，负责激光雷达 SLAM 建图、move_base 全局路径规划 + TEB 局部路径规划、自主完成避障参数调优；开发语音交互与业务逻辑模块，集成视觉识别实现药品/货架自动识别与精准配送</span>
-        </span>
-        <span class="award-result g">全国一等奖</span>
-      </div>
-      <div class="award-row award-major">
-        <span class="award-rank b1">03</span>
-        <span>
-          <span class="award-year">2025</span>
-          <span class="award-name">全国大学生电子设计大赛（控制赛道）</span>
-          <span class="award-desc">▸ 担任队长带队参赛，基于 STM32F103C8T6 + MSPM0G3507 双主控架构，实现黑线循迹、YOLO 视觉目标识别（2秒锁定）、云台 PID 闭环激光打靶；进阶实现椭圆轨道边行驶边锁定目标持续打靶，独立完成传感器选型、电机闭环驱动、滤波算法与整车系统联调</span>
-        </span>
-        <span class="award-result b">省级二等奖</span>
-      </div>
-      <div class="award-row award-major">
-        <span class="award-rank s1">04</span>
+        <span class="award-rank s1">01</span>
         <span>
           <span class="award-year">2026</span>
           <span class="award-name">第六届大唐杯信息通信新技术大赛</span>
@@ -860,7 +832,7 @@ body {
         <span class="award-result s">全国二等奖</span>
       </div>
       <div class="award-row award-major">
-        <span class="award-rank s1">05</span>
+        <span class="award-rank s1">02</span>
         <span>
           <span class="award-year">2025.10</span>
           <span class="award-name">ICAN大学生创新创业大赛（AI视觉检测赛道）</span>
