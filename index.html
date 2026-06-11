@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>曹刚 — 嵌入式 / 机器人工程师</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════
+   工程蓝图 Blueprint v1.0
+   曹刚 · 嵌入式 & 机器人工程师
+   白底蓝图 · 制图美学 · 精密工程
+   ═══════════════════════════════════════════════════ */
+
+:root {
+  --paper:        #f4f0e6;
+  --paper-warm:   #ede7d9;
+  --paper-grid:   #e8e2d2;
+  --ink-deep:     #0f2940;
+  --ink:          #1b4f7a;
+  --ink-mid:      #3a6f96;
+  --ink-light:    #7ca6c0;
+  --ink-faint:    #bdd4e5;
+  --ink-line:     #d6e3ed;
+  --red-mark:     #c44233;
+  --red-dim:      #e0735e;
+  --text:         #1a1f26;
+  --text-secondary: #4a5568;
+  --text-muted:   #718096;
+  --white:        #fdfcf8;
+
+  --font-display: 'Noto Serif SC', 'SimSun', 'STSong', serif;
+  --font-calligraphy: 'Ma Shan Zheng', 'STKaiti', cursive;
+  --font-body:    'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  --radius: 3px;
+  --radius-lg: 6px;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:15px; }
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:var(--paper); }
+::-webkit-scrollbar-thumb { background:var(--ink-light); border-radius:3px; }
+
+body {
+  font-family:var(--font-body);
+  background:var(--paper);
+  color:var(--text);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+
+/* ── Paper texture & grid ── */
+.bg-layer {
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+}
+.bg-paper {
+  background:
+    linear-gradient(90deg, var(--paper-grid) 0, transparent 1px) 0 0 / 48px 48px,
+    linear-gradient(0deg, var(--paper-grid) 0, transparent 1px) 0 0 / 48px 48px,
+    linear-gradient(135deg, rgba(27,79,122,0.015) 25%, transparent 25%) -12px 0 / 24px 24px,
+    linear-gradient(225deg, rgba(27,79,122,0.015) 25%, transparent 25%) -12px 0 / 24px 24px;
+  position:fixed; inset:0;
+  mask-image:radial-gradient(ellipse at 50% 0%, black 40%, transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse at 50% 0%, black 40%, transparent 80%);
+}
+.bg-noise {
+  position:fixed; inset:0; opacity:0.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Corner registration marks ── */
+.reg-mark {
+  position:fixed; z-index:1; pointer-events:none; opacity:0.3;
+}
+.reg-mark::before, .reg-mark::after { content:''; position:absolute; background:var(--ink-light); }
+.reg-tl { top:12px; left:12px; width:16px; height:16px; }
+.reg-tl::before { top:0; left:0; width:16px; height:1px; }
+.reg-tl::after { top:0; left:0; width:1px; height:16px; }
+.reg-tr { top:12px; right:12px; width:16px; height:16px; }
+.reg-tr::before { top:0; right:0; width:16px; height:1px; }
+.reg-tr::after { top:0; right:0; width:1px; height:16px; }
+.reg-bl { bottom:12px; left:12px; width:16px; height:16px; }
+.reg-bl::before { bottom:0; left:0; width:16px; height:1px; }
+.reg-bl::after { bottom:0; left:0; width:1px; height:16px; }
+.reg-br { bottom:12px; right:12px; width:16px; height:16px; }
+.reg-br::before { bottom:0; right:0; width:16px; height:1px; }
+.reg-br::after { bottom:0; right:0; width:1px; height:16px; }
+
+/* ── Layout ── */
+.page {
+  position:relative; z-index:2;
+  max-width:900px; margin:0 auto;
+  padding:0 36px 72px;
+}
+
+/* ── Title Block (engineering drawing) ── */
+.title-block {
+  margin:36px 0 0;
+  border:2px solid var(--ink);
+  border-bottom:1px solid var(--ink-mid);
+  padding:18px 24px 14px;
+  position:relative;
+  background:var(--white);
+  border-radius:var(--radius) var(--radius) 0 0;
+}
+.title-block::after {
+  content:''; position:absolute; bottom:-1px; left:-2px; right:-2px;
+  height:4px; background:linear-gradient(90deg, var(--ink-deep), var(--ink-mid), var(--ink-light), var(--ink-mid), var(--ink-deep));
+}
+.title-block-content {
+  display:flex; justify-content:space-between; align-items:flex-end;
+  flex-wrap:wrap; gap:12px;
+}
+.title-block-left .dwg-no {
+  font-family:var(--font-mono); font-size:0.68rem;
+  color:var(--ink-mid); letter-spacing:2px;
+}
+.title-block-left .dwg-title {
+  font-family:var(--font-display); font-size:1.3rem;
+  color:var(--ink-deep); font-weight:900; letter-spacing:3px; margin-top:2px;
+}
+.title-block-right {
+  text-align:right; font-family:var(--font-mono); font-size:0.62rem;
+  color:var(--ink-mid); line-height:1.8;
+}
+.title-block-right span { display:block; }
+.title-block-right .rev { color:var(--red-mark); font-weight:700; }
+
+/* ── Hero ── */
+.hero {
+  display:flex; align-items:center; gap:40px;
+  padding:36px 24px; position:relative;
+  border-left:2px solid var(--ink);
+  border-right:2px solid var(--ink);
+  background:var(--white);
+}
+.hero::before {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg, transparent, var(--ink-light), var(--ink-mid), var(--ink-light), transparent);
+}
+
+/* Photo — blueprint compass frame */
+.hero-photo-wrap {
+  flex-shrink:0; position:relative; padding:8px;
+}
+.hero-photo-wrap::before {
+  content:''; position:absolute; inset:0;
+  border:1px solid var(--ink-light);
+  border-radius:50%;
+}
+.hero-photo-wrap::after {
+  content:''; position:absolute; top:50%; left:-20px; right:-20px; height:1px;
+  background:var(--ink-faint); z-index:-1;
+}
+.hero-photo-inner {
+  width:100px; height:100px; border-radius:50%; overflow:hidden;
+  border:2px solid var(--ink);
+  position:relative;
+}
+.hero-photo-inner img {
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+.hero-photo-inner .fallback {
+  display:none; width:100%; height:100%;
+  background:var(--paper-warm); align-items:center; justify-content:center;
+  font-family:var(--font-display); font-size:2.2rem; font-weight:900;
+  color:var(--ink); letter-spacing:2px;
+}
+
+.hero-info { flex:1; min-width:0; }
+.hero-badge {
+  display:inline-flex; align-items:center; gap:7px;
+  font-family:var(--font-mono); font-size:0.64rem;
+  color:var(--ink-mid); letter-spacing:2px;
+  margin-bottom:10px; padding:4px 0;
+  border-bottom:1px solid var(--ink-faint);
+}
+.hero-badge .dot {
+  width:7px; height:7px; background:var(--red-mark);
+  border-radius:50%;
+}
+.hero h1 {
+  font-family:var(--font-calligraphy); font-size:4rem; font-weight:400;
+  color:var(--ink-deep); letter-spacing:20px; line-height:1.05;
+  margin-bottom:2px;
+}
+.hero .subtitle {
+  font-size:0.88rem; color:var(--text-secondary); font-weight:300;
+  letter-spacing:2px; margin-bottom:16px;
+}
+.hero-stats { display:flex; gap:22px; flex-wrap:wrap; }
+.hero-stat { font-family:var(--font-mono); }
+.hero-stat-val {
+  font-size:1.5rem; font-weight:700; color:var(--ink);
+  line-height:1;
+}
+.hero-stat-label {
+  font-size:0.6rem; color:var(--text-muted); letter-spacing:1.5px; margin-top:3px;
+}
+
+/* ── Contact ── */
+.contact-row {
+  display:flex; flex-wrap:wrap; gap:16px 28px;
+  padding:14px 24px; font-size:0.76rem; color:var(--text-secondary);
+  border-left:2px solid var(--ink); border-right:2px solid var(--ink);
+  background:var(--white);
+}
+.contact-item {
+  display:inline-flex; align-items:center; gap:6px;
+}
+.contact-item .ci-icon {
+  font-family:var(--font-mono); font-size:0.6rem; color:var(--ink-light);
+  width:16px; text-align:center;
+}
+
+/* ── Section heading — dimension line style ── */
+.section {
+  margin-top:44px;
+}
+.section-head {
+  display:flex; align-items:center; gap:12px; margin-bottom:22px;
+  position:relative;
+}
+.section-num {
+  font-family:var(--font-mono); font-size:0.66rem;
+  color:var(--ink-mid); background:var(--paper);
+  border:1px solid var(--ink-light); border-radius:50%;
+  width:28px; height:28px; display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.section-head h2 {
+  font-family:var(--font-display); font-size:1.3rem;
+  font-weight:700; color:var(--ink-deep); letter-spacing:4px;
+  white-space:nowrap;
+}
+.section-line {
+  flex:1; height:0; position:relative;
+}
+.section-line::before {
+  content:''; position:absolute; top:50%; left:0; right:0; height:1px;
+  background:var(--ink-line);
+}
+.section-line::after {
+  content:''; position:absolute; right:0; top:50%; transform:translateY(-50%);
+  width:0; height:0;
+  border-top:5px solid transparent; border-bottom:5px solid transparent;
+  border-left:8px solid var(--ink-light);
+}
+
+/* ── Education ── */
+.edu-card {
+  display:grid; grid-template-columns:1fr auto;
+  align-items:center; gap:16px;
+  padding:22px 28px; position:relative;
+  background:var(--white);
+  border:1px solid var(--ink-line);
+  border-radius:var(--radius-lg);
+  transition:box-shadow 0.3s var(--ease);
+}
+.edu-card:hover { box-shadow:0 4px 20px rgba(27,79,122,0.08); }
+.edu-card::before {
+  content:''; position:absolute; left:0; top:0; bottom:0;
+  width:3px; background:var(--ink); border-radius:3px 0 0 3px;
+}
+.edu-school {
+  font-size:1.1rem; font-weight:700; color:var(--ink-deep); letter-spacing:2px;
+}
+.edu-dept { font-size:0.8rem; color:var(--text-secondary); margin-top:2px; }
+.edu-time {
+  font-family:var(--font-mono); font-size:0.74rem; color:var(--ink);
+  padding:6px 14px; border:1px solid var(--ink-light);
+  border-radius:2px; white-space:nowrap;
+}
+.edu-courses {
+  margin-top:14px; padding:14px 20px;
+  background:var(--paper-warm); border-radius:var(--radius);
+  font-size:0.78rem; color:var(--text-secondary); line-height:1.9;
+}
+.edu-courses .courses-label {
+  font-family:var(--font-mono); font-size:0.62rem; color:var(--ink-mid);
+  letter-spacing:2px; font-weight:600; margin-right:6px;
+}
+.edu-courses .score {
+  display:inline-block; padding:0 5px;
+  background:var(--ink-faint); color:var(--ink);
+  font-family:var(--font-mono); font-size:0.66rem; font-weight:700;
+  border-radius:2px;
+}
+
+/* ── Skills Grid ── */
+.skills-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; }
+@media(max-width:860px) { .skills-grid { grid-template-columns:repeat(2, 1fr); } }
+@media(max-width:520px) { .skills-grid { grid-template-columns:1fr; } }
+
+.skill-cell {
+  background:var(--white);
+  border:1px solid var(--ink-line);
+  padding:16px; border-radius:var(--radius);
+  position:relative; transition:all 0.3s var(--ease);
+}
+.skill-cell:hover {
+  border-color:var(--ink-light);
+  transform:translateY(-2px);
+  box-shadow:0 4px 16px rgba(27,79,122,0.06);
+}
+.skill-cell .sk-label {
+  font-family:var(--font-mono); font-size:0.6rem;
+  color:var(--ink-mid); letter-spacing:1.5px; margin-bottom:6px;
+  text-transform:uppercase;
+}
+.skill-cell .sk-content {
+  font-size:0.79rem; color:var(--text); font-weight:500; line-height:1.5;
+}
+.skill-cell .sk-bars {
+  display:flex; gap:3px; margin-top:8px;
+}
+.sk-bar {
+  width:15px; height:3px; background:var(--ink-line); border-radius:2px;
+  transition:background 0.3s;
+}
+.sk-bar.on { background:var(--ink); }
+.skill-cell:hover .sk-bar.on { background:var(--ink-deep); }
+
+/* ── Project Cards — spec sheet style ── */
+.proj-card {
+  margin-bottom:14px; background:var(--white);
+  border:1px solid var(--ink-line);
+  border-radius:var(--radius-lg); overflow:hidden;
+  transition:all 0.3s var(--ease);
+}
+.proj-card:hover {
+  border-color:var(--ink-light);
+  box-shadow:0 4px 24px rgba(27,79,122,0.07);
+}
+.proj-header {
+  display:flex; align-items:center; gap:10px;
+  padding:10px 16px; background:var(--ink-deep); color:#fff;
+  font-family:var(--font-mono); font-size:0.64rem; letter-spacing:1px;
+}
+.proj-header .ph-num {
+  font-weight:700; color:var(--ink-faint);
+}
+.proj-header .ph-award {
+  margin-left:auto; padding:2px 8px; border-radius:2px;
+  font-size:0.6rem; letter-spacing:1px; font-weight:700;
+}
+.proj-header .ph-award.gold { background:#b8860b; color:#fff; }
+.proj-header .ph-award.silver { background:var(--ink-mid); color:#fff; }
+
+.proj-body { padding:18px 20px; }
+.proj-name {
+  font-size:1.05rem; font-weight:700; color:var(--ink-deep); letter-spacing:1px;
+  margin-bottom:2px;
+}
+.proj-from {
+  font-size:0.72rem; color:var(--text-muted); margin-bottom:10px;
+}
+.proj-desc {
+  font-size:0.8rem; color:var(--text-secondary); line-height:1.7; margin-bottom:10px;
+}
+.proj-details {
+  list-style:none;
+}
+.proj-details li {
+  font-size:0.76rem; color:var(--text-secondary); line-height:1.85;
+  padding-left:20px; position:relative;
+}
+.proj-details li::before {
+  content:'◇'; position:absolute; left:2px; color:var(--ink-light);
+  font-size:0.5rem; top:0.4rem;
+}
+.proj-result {
+  font-family:var(--font-mono); font-size:0.64rem;
+  color:var(--ink-mid); margin-top:10px;
+  padding:6px 0; border-top:1px dashed var(--ink-line);
+}
+.proj-tags {
+  display:flex; flex-wrap:wrap; gap:4px; padding:10px 16px;
+  border-top:1px solid var(--ink-line); background:var(--paper-warm);
+}
+.proj-tag {
+  font-family:var(--font-mono); font-size:0.6rem;
+  padding:3px 8px; border-radius:2px;
+  color:var(--ink-mid); background:var(--white);
+  border:1px solid var(--ink-line);
+  transition:all 0.2s;
+}
+.proj-tag.key { color:var(--ink); border-color:var(--ink-light); background:rgba(27,79,122,0.03); }
+
+/* ── Awards Table ── */
+.awards-wrap {
+  background:var(--white); border:1px solid var(--ink-line);
+  border-radius:var(--radius-lg); overflow:hidden;
+}
+.award-row {
+  display:grid; grid-template-columns:32px 1fr auto;
+  align-items:center; padding:11px 18px; gap:12px;
+  border-bottom:1px solid var(--ink-line); font-size:0.78rem;
+  transition:background 0.2s;
+}
+.award-row:last-child { border-bottom:none; }
+.award-row:hover { background:var(--paper-warm); }
+.award-row.head {
+  font-family:var(--font-mono); font-size:0.62rem; color:var(--ink-mid);
+  letter-spacing:2px; background:var(--paper-warm); font-weight:600;
+}
+.award-row.head:hover { background:var(--paper-warm); }
+.award-rank {
+  text-align:center; font-family:var(--font-mono); font-weight:700;
+  font-size:0.72rem; color:var(--ink-mid);
+}
+.award-rank.g1 { color:#b8860b; }
+.award-rank.s1 { color:var(--ink); }
+.award-rank.b1 { color:var(--text-muted); }
+.award-name { color:var(--text); }
+.award-year {
+  font-family:var(--font-mono); font-size:0.66rem; color:var(--ink-light);
+  margin-right:4px;
+}
+.award-result {
+  text-align:right; font-family:var(--font-mono);
+  font-size:0.68rem; font-weight:700; white-space:nowrap;
+}
+.award-result.g { color:#b8860b; }
+.award-result.s { color:var(--ink); }
+.award-result.b { color:var(--text-muted); }
+
+/* ── Self Evaluation ── */
+.eval-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; }
+@media(max-width:720px) { .eval-grid { grid-template-columns:1fr; } }
+.eval-card {
+  background:var(--white); border:1px solid var(--ink-line);
+  border-radius:var(--radius-lg); padding:20px;
+  position:relative; transition:all 0.3s var(--ease);
+}
+.eval-card:hover {
+  border-color:var(--ink-light);
+  transform:translateY(-2px);
+  box-shadow:0 4px 20px rgba(27,79,122,0.06);
+}
+.eval-card .ev-icon {
+  font-size:2.4rem; color:var(--ink-light); line-height:0.8;
+  margin-bottom:10px; opacity:0.5;
+}
+.eval-card p {
+  font-size:0.79rem; color:var(--text-secondary); line-height:1.75;
+}
+
+/* ── Footer ── */
+.footer {
+  margin-top:52px; padding-top:24px;
+  border-top:1px solid var(--ink-line); text-align:center;
+  position:relative;
+}
+.footer::before {
+  content:''; position:absolute; top:-1px; left:50%; transform:translateX(-50%);
+  width:40px; height:2px; background:var(--ink);
+}
+.footer-main {
+  font-family:var(--font-display); font-size:1rem;
+  color:var(--ink-mid); letter-spacing:4px; margin-bottom:6px;
+}
+.footer-sub {
+  font-size:0.66rem; color:var(--text-muted);
+  font-family:var(--font-mono); letter-spacing:1px;
+}
+.footer-copy { font-size:0.6rem; color:var(--ink-light); margin-top:6px; }
+
+/* ── Bottom title block line ── */
+.title-block-bottom {
+  margin:40px 0 0;
+  border:2px solid var(--ink);
+  border-top:1px solid var(--ink-mid);
+  padding:10px 24px; background:var(--white);
+  border-radius:0 0 var(--radius) var(--radius);
+  display:flex; justify-content:space-between;
+  font-family:var(--font-mono); font-size:0.58rem; color:var(--ink-mid);
+  letter-spacing:1px;
+}
+
+/* ── Back to Top ── */
+.back-top {
+  position:fixed; bottom:28px; right:28px; z-index:100;
+  width:36px; height:36px; border-radius:50%;
+  background:var(--ink); color:var(--paper);
+  border:none; cursor:pointer; font-size:1.1rem;
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; transform:translateY(12px); pointer-events:none;
+  transition:all 0.3s var(--ease);
+}
+.back-top.show { opacity:1; transform:translateY(0); pointer-events:auto; }
+.back-top:hover { background:var(--ink-deep); transform:translateY(-2px) scale(1.05); }
+.back-top:active { transform:scale(0.9); }
+
+/* ═══ Scroll Reveal ═══ */
+.reveal {
+  opacity:0; transform:translateY(20px);
+  transition:opacity 0.65s var(--ease), transform 0.65s var(--ease);
+}
+.reveal.in { opacity:1; transform:translateY(0); }
+.reveal-d1 { transition-delay:0.04s; }
+.reveal-d2 { transition-delay:0.1s; }
+.reveal-d3 { transition-delay:0.16s; }
+.reveal-d4 { transition-delay:0.22s; }
+.reveal-d5 { transition-delay:0.28s; }
+
+/* ═══════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════ */
+@media(max-width:768px) {
+  .page { padding:0 16px 48px; }
+  .hero { flex-direction:column; text-align:center; gap:22px; padding:28px 18px; }
+  .hero h1 { font-size:3rem; letter-spacing:10px; }
+  .hero-stats { justify-content:center; }
+  .contact-row { justify-content:center; }
+  .skills-grid { grid-template-columns:1fr 1fr; }
+  .title-block-content { flex-direction:column; align-items:flex-start; gap:8px; }
+  .title-block-right { text-align:left; }
+  .edu-card { grid-template-columns:1fr; }
+  .award-row { grid-template-columns:1fr auto; padding:9px 14px; font-size:0.72rem; }
+  .award-rank { display:none; }
+  .eval-grid { grid-template-columns:1fr; }
+  .back-top { bottom:18px; right:18px; width:32px; height:32px; }
+}
+@media(max-width:480px) {
+  .skills-grid { grid-template-columns:1fr; }
+  .hero h1 { font-size:2.4rem; letter-spacing:6px; }
+  .hero-photo-inner { width:80px; height:80px; }
+}
+
+/* ═══════════════════════════════
+   PRINT STYLES
+   ═══════════════════════════════ */
+@media print {
+  @page { size:A4; margin:10mm 12mm; }
+  body { background:#fff; color:#111; font-size:10px; line-height:1.45; }
+  .bg-layer, .bg-paper, .bg-noise, .reg-mark,
+  .back-top, .section-line::after { display:none !important; }
+
+  .page { max-width:100%; padding:0; }
+  .title-block, .title-block-bottom { border-color:#333; background:#fff; }
+  .title-block::after { background:#333; }
+  .hero { border-color:#333; background:#fff; padding:20px 0; gap:16px; flex-direction:row; }
+  .hero::before { display:none; }
+  .hero h1 { font-size:22px; letter-spacing:4px; color:#111; }
+  .hero .subtitle { font-size:9px; color:#555; }
+  .hero-stats { display:none; }
+  .hero-badge { display:none; }
+  .hero-photo-wrap::before { border-color:#999; }
+  .hero-photo-wrap::after { display:none; }
+  .hero-photo-inner { width:60px; height:60px; border-color:#333; }
+  .contact-row { border-color:#333; font-size:8px; padding:8px 0; background:#fff; }
+
+  .section-head h2 { font-size:12px; color:#111; }
+  .section-line::before { background:#ccc; }
+  .section-num { border-color:#999; color:#333; background:#fff; }
+
+  .edu-card { border:none; border-left:3px solid #333; border-radius:0; padding:8px 12px; background:#fff; }
+  .edu-card::before { display:none; }
+  .edu-school { font-size:11px; }
+  .edu-courses { background:#fafafa; }
+
+  .skills-grid { grid-template-columns:1fr 1fr; gap:2px; }
+  .skill-cell { border:none; padding:4px 0; background:transparent; }
+  .skill-cell:hover { transform:none; box-shadow:none; border:none; }
+  .skill-cell .sk-label { font-size:7px; }
+  .skill-cell .sk-content { font-size:8px; }
+  .sk-bars { display:none; }
+
+  .proj-card { border:none; border-left:3px solid #333; border-radius:0; margin-bottom:8px; background:#fff; break-inside:avoid; }
+  .proj-card:hover { box-shadow:none; }
+  .proj-header { background:#333; padding:4px 10px; font-size:7px; }
+  .proj-body { padding:6px 10px; }
+  .proj-name { font-size:10px; }
+  .proj-desc { font-size:8px; color:#555; }
+  .proj-details li { font-size:7px; color:#555; }
+  .proj-tags { background:#fafafa; padding:4px 10px; }
+  .proj-tag { font-size:6px; padding:1px 5px; }
+  .proj-result { font-size:7px; }
+
+  .awards-wrap { border:none; }
+  .award-row { grid-template-columns:1fr auto; padding:4px 8px; font-size:7px; border-bottom:1px solid #eee; background:#fff; }
+  .award-row.head { background:#333; color:#fff; }
+  .award-rank { display:none; }
+
+  .eval-grid { grid-template-columns:1fr; gap:4px; }
+  .eval-card { border:none; border-left:3px solid #333; border-radius:0; padding:6px 10px; background:#fff; }
+  .eval-card:hover { transform:none; box-shadow:none; }
+  .eval-card .ev-icon { display:none; }
+  .eval-card p { font-size:8px; color:#555; }
+
+  .footer { border-color:#ccc; margin-top:16px; padding-top:10px; }
+  .footer-main { font-size:10px; }
+  .footer-sub { font-size:7px; }
+
+  .reveal { opacity:1 !important; transform:none !important; transition:none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg-paper"></div>
+<div class="bg-noise"></div>
+
+<!-- Registration marks -->
+<div class="reg-mark reg-tl"></div>
+<div class="reg-mark reg-tr"></div>
+<div class="reg-mark reg-bl"></div>
+<div class="reg-mark reg-br"></div>
+
+<div class="page">
+
+  <!-- ═══ TITLE BLOCK ═══ -->
+  <div class="title-block">
+    <div class="title-block-content">
+      <div class="title-block-left">
+        <div class="dwg-no">DWG-NO · E-RES-2026-01</div>
+        <div class="dwg-title">嵌入式 · 机器人工程师</div>
+      </div>
+      <div class="title-block-right">
+        <span>REV <span class="rev">02</span></span>
+        <span>DATE 2026.06</span>
+        <span>SHEET 1 / 1</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ HERO ═══ -->
+  <header class="hero">
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-inner">
+        <img src="file:///D:/图片/微信图片_20260607114108_316_39.png"
+             alt="曹刚"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="fallback">曹</div>
+      </div>
+    </div>
+    <div class="hero-info">
+      <div class="hero-badge"><span class="dot"></span> EMBEDDED · ROBOTICS · ROS · STM32</div>
+      <h1>曹 刚</h1>
+      <div class="subtitle">嵌入式软件工程师 / 机器人工程师</div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-val">9<sup style="font-size:0.5em">+</sup></div>
+          <div class="hero-stat-label">学科竞赛</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">2×</div>
+          <div class="hero-stat-label">全国一等奖</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">ROS</div>
+          <div class="hero-stat-label">机器人系统</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">STM32</div>
+          <div class="hero-stat-label">主力平台</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contact -->
+  <div class="contact-row">
+    <span class="contact-item"><span class="ci-icon">☎</span> 17718718272</span>
+    <span class="contact-item"><span class="ci-icon">✎</span> 1471919223@qq.com</span>
+    <span class="contact-item"><span class="ci-icon">⌂</span> 甘肃定西</span>
+    <span class="contact-item"><span class="ci-icon">◷</span> 2004.11</span>
+    <span class="contact-item"><span class="ci-icon">⚑</span> 共青团员</span>
+  </div>
+
+  <!-- ═══ EDUCATION ═══ -->
+  <section class="section reveal">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2>教育背景</h2>
+      <span class="section-line"></span>
+    </div>
+    <div class="edu-card">
+      <div>
+        <div class="edu-school">太原科技大学</div>
+        <div class="edu-dept">电子信息工程学院 · 自动化（本科）</div>
+      </div>
+      <div class="edu-time">2023.09 ── 2027.06</div>
+    </div>
+    <div class="edu-courses">
+      <span class="courses-label">▸ CORE COURSES</span>
+      C语言 · 模拟电子技术 <span class="score">87</span> · 数字电子技术 <span class="score">86</span> · 微机原理 <span class="score">88</span> · 自动控制原理 · 现代控制理论 · 运动控制系统 · 过程控制系统
+    </div>
+  </section>
+
+  <!-- ═══ SKILLS ═══ -->
+  <section class="section reveal reveal-d1">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2>专业技能</h2>
+      <span class="section-line"></span>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-cell">
+        <div class="sk-label">// 编程语言</div>
+        <div class="sk-content">熟练掌握 C、C++，熟悉算法与数据结构</div>
+        <div class="sk-bars"><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span></div>
+      </div>
+      <div class="skill-cell">
+        <div class="sk-label">// 芯片开发</div>
+        <div class="sk-content">STM32（标准库/HAL/LL）、GD32、ESP32</div>
+        <div class="sk-bars"><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span></div>
+      </div>
+      <div class="skill-cell">
+        <div class="sk-label">// 通信接口</div>
+        <div class="sk-content">TIMER、UART、SPI、I2C、ADC、PWM、DMA</div>
+        <div class="sk-bars"><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span></div>
+      </div>
+      <div class="skill-cell">
+        <div class="sk-label">// 机器人系统</div>
+        <div class="sk-content">ROS1、SLAM建图、move_base、TEB局部规划</div>
+        <div class="sk-bars"><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar"></span></div>
+      </div>
+      <div class="skill-cell">
+        <div class="sk-label">// 开发工具</div>
+        <div class="sk-content">Keil、VSCode、ESP-ADF、CCS</div>
+        <div class="sk-bars"><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar"></span></div>
+      </div>
+      <div class="skill-cell">
+        <div class="sk-label">// 传感器</div>
+        <div class="sk-content">激光雷达、MAXCAM视觉模块、语音交互</div>
+        <div class="sk-bars"><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar"></span><span class="sk-bar"></span></div>
+      </div>
+      <div class="skill-cell">
+        <div class="sk-label">// 通信协议</div>
+        <div class="sk-content">串口协议设计、粘包处理、帧同步</div>
+        <div class="sk-bars"><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar"></span></div>
+      </div>
+      <div class="skill-cell">
+        <div class="sk-label">// 仪器使用</div>
+        <div class="sk-content">示波器、万用表、直流电源</div>
+        <div class="sk-bars"><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar on"></span><span class="sk-bar"></span><span class="sk-bar"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROJECTS ═══ -->
+  <section class="section reveal reveal-d2">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2>项目经历</h2>
+      <span class="section-line"></span>
+    </div>
+
+    <!-- Project 1 -->
+    <div class="proj-card">
+      <div class="proj-header">
+        <span class="ph-num">PRJ-001</span>
+        <span>~/projects/elderly-care-robot</span>
+        <span class="ph-award gold">● 全国一等奖</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-name">智能养老护理机器人</div>
+        <div class="proj-from">全国大学生信息安全与对抗技术竞赛 · 智能安全赛 · 全国总决赛 · 2025</div>
+        <div class="proj-desc">基于 ROS 机器人操作系统设计智能养老护理机器人，在模拟家居环境中自主运行，完成环境感知、家电控制、物联网组网与数据采集，实时监测老人生命体征并保障数据安全隐私。</div>
+        <ul class="proj-details">
+          <li>基于 STM32C8T6 主控完成系统架构设计与固件开发，驱动步进电机实现机械臂精准控制</li>
+          <li>设计串口通信协议，处理粘包与帧同步问题；集成 MAXCAM 视觉模块实现目标识别与自主抓取</li>
+          <li>集成激光雷达 SLAM 导航、Zigbee 物联网、科大讯飞语音、人脸识别、跌倒检测等模块</li>
+        </ul>
+        <div class="proj-result">◇ BUILD SUCCESSFUL · AWARD: 全国一等奖</div>
+      </div>
+      <div class="proj-tags">
+        <span class="proj-tag key">ROS</span><span class="proj-tag key">激光SLAM</span><span class="proj-tag">Zigbee</span><span class="proj-tag">MD5加密</span><span class="proj-tag key">科大讯飞语音</span><span class="proj-tag">人脸识别</span><span class="proj-tag">跌倒检测</span><span class="proj-tag key">STM32C8T6</span><span class="proj-tag">步进电机</span><span class="proj-tag">MAXCAM</span><span class="proj-tag">DHT22</span><span class="proj-tag">CO₂传感器</span>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="proj-card">
+      <div class="proj-header">
+        <span class="ph-num">PRJ-002</span>
+        <span>~/projects/pharmacy-robot</span>
+        <span class="ph-award gold">● 全国一等奖</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-name">智慧药房机器人</div>
+        <div class="proj-from">全国大学生机器人及人工智能大赛 · 智慧药房赛道 · 2025</div>
+        <div class="proj-desc">基于 ROS1 搭建智慧药房自动配送机器人系统，实现从取药到送药的全流程自动化。</div>
+        <ul class="proj-details">
+          <li>全权参与系统设计与开发：激光雷达 SLAM 建图、move_base + TEB 导航、避障参数调优</li>
+          <li>开发语音交互模块与业务逻辑代码，集成视觉识别完成药品/货架识别与自动配送</li>
+        </ul>
+        <div class="proj-result">◇ BUILD SUCCESSFUL · AWARD: 全国一等奖</div>
+      </div>
+      <div class="proj-tags">
+        <span class="proj-tag key">ROS1</span><span class="proj-tag key">SLAM</span><span class="proj-tag key">move_base</span><span class="proj-tag key">TEB</span><span class="proj-tag">激光雷达</span><span class="proj-tag">语音交互</span><span class="proj-tag">视觉识别</span><span class="proj-tag">避障调参</span>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="proj-card">
+      <div class="proj-header">
+        <span class="ph-num">PRJ-003</span>
+        <span>~/projects/tracking-car</span>
+        <span class="ph-award silver">● 省级二等奖</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-name">智能循迹打靶小车</div>
+        <div class="proj-from">全国大学生电子设计大赛（控制赛道）· 队长 · 2025</div>
+        <div class="proj-desc">制作小车实现指定黑线循迹圈数，两秒内视觉识别目标并跟踪，利用激光打靶中心；进一步实现边循迹椭圆轨道行驶、边锁定目标持续打靶或画圆。</div>
+        <div class="proj-result">◇ BUILD SUCCESSFUL · AWARD: 省级二等奖</div>
+      </div>
+      <div class="proj-tags">
+        <span class="proj-tag key">YOLO视觉</span><span class="proj-tag key">串行PID</span><span class="proj-tag">云台控制</span><span class="proj-tag">电机闭环</span><span class="proj-tag">滤波算法</span><span class="proj-tag">红外检测</span><span class="proj-tag key">STM32C8T6</span><span class="proj-tag">MPSM0G3507</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ AWARDS ═══ -->
+  <section class="section reveal reveal-d3">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2>竞赛荣誉</h2>
+      <span class="section-line"></span>
+    </div>
+    <div class="awards-wrap">
+      <div class="award-row head">
+        <span>#</span><span>比赛名称</span><span>奖项</span>
+      </div>
+      <div class="award-row">
+        <span class="award-rank g1">01</span>
+        <span><span class="award-year">2025</span> <span class="award-name">全国大学生信息安全与对抗技术竞赛（智能安全赛 · 全国总决赛）</span></span>
+        <span class="award-result g">全国一等奖</span>
+      </div>
+      <div class="award-row">
+        <span class="award-rank g1">02</span>
+        <span><span class="award-year">2025</span> <span class="award-name">全国大学生机器人及人工智能大赛（智慧药房赛道）</span></span>
+        <span class="award-result g">全国一等奖</span>
+      </div>
+      <div class="award-row">
+        <span class="award-rank s1">03</span>
+        <span><span class="award-year">2025.10</span> <span class="award-name">ICAN大学生创新创业大赛（AI视觉检测）</span></span>
+        <span class="award-result s">省级一等奖</span>
+      </div>
+      <div class="award-row">
+        <span class="award-rank s1">04</span>
+        <span><span class="award-year">2025.8</span> <span class="award-name">第十二届全国大学生机械创新设计大赛（慧鱼组）</span></span>
+        <span class="award-result s">全国二等奖</span>
+      </div>
+      <div class="award-row">
+        <span class="award-rank b1">05</span>
+        <span><span class="award-year">2025</span> <span class="award-name">全国大学生电子设计大赛（控制赛道）</span></span>
+        <span class="award-result b">省级二等奖</span>
+      </div>
+      <div class="award-row">
+        <span class="award-rank b1">06</span>
+        <span><span class="award-year">2025.6</span> <span class="award-name">第八届全国大学生嵌入式芯片与系统设计竞赛（芯海杯）</span></span>
+        <span class="award-result b">区域赛三等奖</span>
+      </div>
+      <div class="award-row">
+        <span class="award-rank b1">07</span>
+        <span><span class="award-year">2025</span> <span class="award-name">第六届大唐杯信息通信新技术大赛</span></span>
+        <span class="award-result b">省级二等奖</span>
+      </div>
+      <div class="award-row">
+        <span class="award-rank b1">08</span>
+        <span><span class="award-year">2025</span> <span class="award-name">蓝桥杯全国软件和信息技术专业人才大赛</span></span>
+        <span class="award-result b">省级二等奖</span>
+      </div>
+      <div class="award-row">
+        <span class="award-rank b1">09</span>
+        <span><span class="award-year">2024.8</span> <span class="award-name">第十届全国大学生机械创新设计大赛（慧鱼组）</span></span>
+        <span class="award-result s">省级一等奖</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SELF EVALUATION ═══ -->
+  <section class="section reveal reveal-d4">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2>自我评价</h2>
+      <span class="section-line"></span>
+    </div>
+    <div class="eval-grid">
+      <div class="eval-card">
+        <div class="ev-icon">竞</div>
+        <p>两年内累计参加 9 项学科竞赛，获 2 项全国一等奖、2 项省级一等奖，竞赛经历丰富且持续。</p>
+      </div>
+      <div class="eval-card">
+        <div class="ev-icon">全</div>
+        <p>具备从硬件选型到固件开发再到系统集成的完整项目经验，能独立完成嵌入式系统全链路开发。</p>
+      </div>
+      <div class="eval-card">
+        <div class="ev-icon">解</div>
+        <p>动手能力强，善于在实际工程中定位并解决问题；多次作为核心成员参与国家级竞赛项目。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="footer-main">感谢您花时间阅读我的简历，期待与您的进一步沟通</div>
+    <div class="footer-sub">CAO GANG · Embedded & Robotics Engineer</div>
+    <div class="footer-copy">© 2026 · Blueprint v1.0</div>
+  </footer>
+
+  <!-- Bottom title line -->
+  <div class="title-block-bottom">
+    <span>DWG · E-RES-2026-01</span>
+    <span>REV 02 · 2026.06</span>
+    <span>END OF DOCUMENT</span>
+  </div>
+
+</div>
+
+<button class="back-top" id="backTop" aria-label="回到顶部">↑</button>
+
+<script>
+// ── Back to top ──
+(function() {
+  const btn = document.getElementById('backTop');
+  const toggle = () => {
+    const st = document.documentElement.scrollTop || document.body.scrollTop;
+    btn.classList.toggle('show', st > 400);
+  };
+  window.addEventListener('scroll', toggle, {passive:true});
+  btn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+  toggle();
+})();
+
+// ── Scroll reveal ──
+(function() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('in');
+    });
+  }, {threshold:0.1, rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+})();
+</script>
+
+</body>
+</html>
